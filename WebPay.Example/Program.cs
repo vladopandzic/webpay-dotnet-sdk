@@ -13,11 +13,11 @@ namespace WebPay.Example
         {
             WebPayIntegration wbpayIntegration = new WebPayIntegration(new Configuration
             {
-
-                AuthenticityToken = "hkfjdghfgdsfsdfsd5f4sd4fs4dfsd5",
-                WebPayRootUrl = "https://ipg.webteh.hr/api"
+                AuthenticityToken = "f6c701631605eb9240e5d17d6604b0d819cc53bc",
+                WebPayRootUrl = "https://ipg.webteh.hr/api",
+                Key= "$23p/fg#2"
             });
-            WebPay.Payment payment = new Payment();
+            WebPay.Payment payment = new Payment(wbpayIntegration);
 
             Buyer buyer = new Buyer();
             buyer.FullName = "John Doe";
@@ -28,8 +28,6 @@ namespace WebPay.Example
             buyer.Phone = "phone";
             buyer.ZIP = "123456789";
 
-
-
             Order order = new Order();
             order.Amount = 54321;
             order.OrderNumber = "abcdef";
@@ -38,7 +36,8 @@ namespace WebPay.Example
             Card card = new Card();
             card.CVV = 265;
             card.Pan = "4111111111111111";
-            card.ExpirationDate = "0118";
+            card.ExpirationDate = "1811";
+
             var response = payment.Pay(buyer,order,card);
         }
     }

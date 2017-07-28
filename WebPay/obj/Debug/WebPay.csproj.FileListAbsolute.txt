@@ -5,3 +5,5 @@ C:\PROJEKTI2\WebPay\WebPay\bin\Debug\RestSharp.dll
 C:\PROJEKTI2\WebPay\WebPay\bin\Debug\RestSharp.xml
 C:\PROJEKTI2\WebPay\WebPay\obj\Debug\WebPay.dll
 C:\PROJEKTI2\WebPay\WebPay\obj\Debug\WebPay.pdb
+C:\PROJEKTI2\WebPay\WebPay\bin\Debug\FluentValidation.dll
+C:\PROJEKTI2\WebPay\WebPay\bin\Debug\FluentValidation.xml

@@ -11,5 +11,7 @@ namespace WebPay
         public string AuthenticityToken { get; set; }
 
         public string WebPayRootUrl { get; set; }
+
+        public string Key { get; set; }
     }
 }

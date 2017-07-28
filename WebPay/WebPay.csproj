@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.1.1\lib\net45\FluentValidation.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\RestSharp.105.2.3\lib\net452\RestSharp.dll</HintPath>
       <Private>True</Private>
@@ -45,8 +49,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdriagateValidatorErrorCodes.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Core\Client.cs" />
+    <Compile Include="Core\PaymentRequestObjectBuilder.cs" />
+    <Compile Include="Core\PaymentRequestValidator.cs" />
+    <Compile Include="Exceptions\IntergrationException.cs" />
+    <Compile Include="Extensions.cs" />
+    <Compile Include="Interfaces\IPaymentRequestValidator.cs" />
     <Compile Include="Payment.cs" />
     <Compile Include="Request\Buyer.cs" />
     <Compile Include="Request\Card.cs" />

@@ -22,8 +22,7 @@ namespace WebPay.Core
                 XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer(),
                 RequestFormat = DataFormat.Xml
             };
-            //countries
-            //  Request.appendLoginCookies(this.Auth, ref this.LoginCookies);
+         
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             restsharpRequest.AddBody(paymentRequest.Transaction);
             var restClient = new RestClient("https://ipg.webteh.hr/api");

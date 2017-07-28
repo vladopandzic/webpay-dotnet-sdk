@@ -8,3 +8,5 @@ C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\RestSharp.xml
 C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.csprojResolveAssemblyReference.cache
 C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.exe
 C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.pdb
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\FluentValidation.dll
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\FluentValidation.xml
