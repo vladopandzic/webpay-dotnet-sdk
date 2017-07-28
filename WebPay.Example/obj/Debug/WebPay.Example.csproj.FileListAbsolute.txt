@@ -1,0 +1,10 @@
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\WebPay.Example.exe.config
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\WebPay.Example.exe
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\WebPay.Example.pdb
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\WebPay.dll
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\RestSharp.dll
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\WebPay.pdb
+C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\RestSharp.xml
+C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.csprojResolveAssemblyReference.cache
+C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.exe
+C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.pdb
