@@ -12,30 +12,47 @@ namespace WebPay.Core
 {
     public class Client
     {
-        public Response<PaymentResponse> Pay(PaymentRequest paymentRequest)
+       
+        public Response<T, U> HandleResponse<T, U>(IRestResponse response, Func<bool> whenToDeserializeToSecondGenericParam)
         {
-
-            var restsharpRequest = new RestRequest
+            if (response.StatusCode == HttpStatusCode.NotAcceptable || (int)response.StatusCode == 422)
             {
-                Method = Method.POST,
-                Resource = "/",
-                XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer(),
-                RequestFormat = DataFormat.Xml
-            };
-         
-            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
-            restsharpRequest.AddBody(paymentRequest.Transaction);
-            var restClient = new RestClient("https://ipg.webteh.hr/api");
-          
-            IRestResponse response = restClient.Execute(restsharpRequest);
-            return HandleResponse<PaymentResponse>(response);
 
+                RestSharp.Deserializers.DotNetXmlDeserializer deserial = new RestSharp.Deserializers.DotNetXmlDeserializer();
+                try
+                {
+                    var errors = deserial.Deserialize<ErrorsResponse>(response);
+                    return new Response<T, U>(default(T), default(U), errors, response.StatusCode);
+                }
+                catch (Exception ex)
+                {
+                    var error = new ErrorsResponse(); error.Errors.Add("DESERALIZE EXCEPTION!");
+                    return new Response<T, U>(default(T), default(U), error, response.StatusCode);
+                }
+
+
+            }
+            else if (response.StatusCode == HttpStatusCode.OK)
+            {
+                RestSharp.Deserializers.XmlDeserializer deserial = new RestSharp.Deserializers.XmlDeserializer();
+                if (whenToDeserializeToSecondGenericParam())
+                {
+
+                    var deserialResponse = deserial.Deserialize<U>(response);
+                    return new Response<T, U>(default(T), deserialResponse, null, response.StatusCode);
+                }
+                else
+                {
+                    var deserialResponse = deserial.Deserialize<T>(response);
+                    return new Response<T, U>(deserialResponse, default(U), null, response.StatusCode);
+                }
+            }
+            //HANDLE INTERBNAL SERVER ERROR, REPRODUCED BY SETTING WORONG AUTHENTICTY TOKEN
+            return new Response<T, U>(default(T), default(U), null, response.StatusCode);
         }
-
-
         public Response<T> HandleResponse<T>(IRestResponse response)
         {
-            if (response.StatusCode ==HttpStatusCode.NotAcceptable || response.StatusCode.ToString()=="422")
+            if (response.StatusCode == HttpStatusCode.NotAcceptable || response.StatusCode.ToString() == "422")
             {
 
                 RestSharp.Deserializers.DotNetXmlDeserializer deserial = new RestSharp.Deserializers.DotNetXmlDeserializer();
@@ -46,8 +63,8 @@ namespace WebPay.Core
                 }
                 catch (Exception ex)
                 {
-                    var error = new ErrorsResponse();error.Errors.Add("DESERALIZE EXCEPTION!");
-                    return new Response<T>(default(T),error, response.StatusCode);
+                    var error = new ErrorsResponse(); error.Errors.Add("DESERALIZE EXCEPTION!");
+                    return new Response<T>(default(T), error, response.StatusCode);
                 }
 
 
@@ -58,8 +75,11 @@ namespace WebPay.Core
                 var deserialResponse = deserial.Deserialize<T>(response);
                 return new Response<T>(deserialResponse, null, response.StatusCode);
             }
-
-            return new Response<T>(default(T),null,  response.StatusCode);
+            //HANDLE INTERBNAL SERVER ERROR, REPRODUCED BY SETTING WORONG AUTHENTICTY TOKEN
+            return new Response<T>(default(T), null, response.StatusCode);
         }
     }
+
+
+
 }

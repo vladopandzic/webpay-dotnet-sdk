@@ -22,4 +22,20 @@ namespace WebPay.Response
 
         public T Data { get; set; }
     }
+    public class Response<T,U>
+    {
+        public Response(T data,U alternativeData, ErrorsResponse errorResponse, HttpStatusCode statusCode)
+        {
+            this.Data = data;
+            this.Errors = errorResponse;
+            this.StatusCode = statusCode;
+        }
+        public System.Net.HttpStatusCode StatusCode { get; set; }
+
+        public ErrorsResponse Errors { get; set; }
+
+        public T Data { get; set; }
+
+        public U AlternativeData { get; set; }
+    }
 }

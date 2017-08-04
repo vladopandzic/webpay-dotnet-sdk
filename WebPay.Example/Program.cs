@@ -13,13 +13,33 @@ namespace WebPay.Example
         {
             WebPayIntegration wbpayIntegration = new WebPayIntegration(new Configuration
             {
-                AuthenticityToken = "f6c701631605eb9240e5d17d6604b0d819cc53bc",
-                WebPayRootUrl = "https://ipg.webteh.hr/api",
-                Key= "$23p/fg#2"
-            });
-            WebPay.Payment payment = new Payment(wbpayIntegration);
+                //  AuthenticityToken = "f6c701631605eb9240e5d17d6604b0d819cc53bc",
+                // Key = "$23p/fg#2",
+                AuthenticityToken = "7db11ea5d4a1af32421b564c79b946d1ead3daf0",
+                Key = "dasdsadsa",
+                WebPayRootUrl = "https://ipg.webteh.hr",
 
-            Buyer buyer = new Buyer();
+            });
+            Purchase payment = new Purchase(wbpayIntegration);
+            Buyer buyer; Order order; Card card;
+
+            PrepareData(out buyer, out order, out card);
+
+            TransactionResult payingResult = payment.MakeTransaction(buyer, order, card,Language.EN);
+
+          
+
+            if (payingResult.Has3DSecure) {
+                _3DSecureHandler _3dSecureHandler = new _3DSecureHandler(payingResult.SecureMessage);
+               
+            }
+         
+            
+        }
+
+        private static void PrepareData(out Buyer buyer, out Order order, out Card card)
+        {
+            buyer = new Buyer();
             buyer.FullName = "John Doe";
             buyer.City = "Knoxville";
             buyer.Address = "Elm street 22";
@@ -28,17 +48,15 @@ namespace WebPay.Example
             buyer.Phone = "phone";
             buyer.ZIP = "123456789";
 
-            Order order = new Order();
+            order = new Order();
             order.Amount = 54321;
             order.OrderNumber = "abcdef";
             order.OrderInfo = "1 x SnowMaster 3000";
 
-            Card card = new Card();
+            card = new Card();
             card.CVV = 265;
             card.Pan = "4111111111111111";
             card.ExpirationDate = "1811";
-
-            var response = payment.Pay(buyer,order,card);
         }
     }
 }

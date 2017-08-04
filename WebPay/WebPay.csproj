@@ -41,6 +41,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,19 +50,33 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AdriagateValidatorErrorCodes.cs" />
+    <Compile Include="3DSecureHandler.cs" />
+    <Compile Include="Authorization.cs" />
+    <Compile Include="Capture.cs" />
+    <Compile Include="Core\Crypt.cs" />
+    <Compile Include="Core\NetworkHelper.cs" />
+    <Compile Include="Core\PaymentChangeClient.cs" />
+    <Compile Include="Core\PaymentChangeRequestObjectBuilder.cs" />
+    <Compile Include="Core\PaymentCommitClient.cs" />
+    <Compile Include="Core\RequestBuilder.cs" />
+    <Compile Include="Interfaces\IPaymentChangeClient.cs" />
+    <Compile Include="Interfaces\IPaymentCommitClient.cs" />
+    <Compile Include="TransactionResult.cs" />
+    <Compile Include="PaymentRequestValidatorErrorCodes.cs" />
     <Compile Include="Configuration.cs" />
     <Compile Include="Core\Client.cs" />
-    <Compile Include="Core\PaymentRequestObjectBuilder.cs" />
-    <Compile Include="Core\PaymentRequestValidator.cs" />
+    <Compile Include="Core\PaymentCommitRequestObjectBuilder.cs" />
+    <Compile Include="Core\PaymentCommitRequestValidator.cs" />
     <Compile Include="Exceptions\IntergrationException.cs" />
     <Compile Include="Extensions.cs" />
-    <Compile Include="Interfaces\IPaymentRequestValidator.cs" />
-    <Compile Include="Payment.cs" />
+    <Compile Include="Purchase.cs" />
+    <Compile Include="Request\PaymentChangeRequest.cs" />
+    <Compile Include="Request\TransactionSimple.cs" />
+    <Compile Include="TransactionMessage.cs" />
     <Compile Include="Request\Buyer.cs" />
     <Compile Include="Request\Card.cs" />
     <Compile Include="Request\Order.cs" />
-    <Compile Include="Request\PaymentRequest.cs" />
+    <Compile Include="Request\PaymentCommitRequest.cs" />
     <Compile Include="Request\ProcessingData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Request\Transaction.cs" />
@@ -70,6 +85,7 @@
     <Compile Include="Response\PaymentResponse.cs" />
     <Compile Include="Response\ReponseCode.cs" />
     <Compile Include="Response\Response.cs" />
+    <Compile Include="Response\SecureMessage.cs" />
     <Compile Include="WebPayIntegration.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -10,3 +10,15 @@ C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.exe
 C:\PROJEKTI2\WebPay\WebPay.Example\obj\Debug\WebPay.Example.pdb
 C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\FluentValidation.dll
 C:\PROJEKTI2\WebPay\WebPay.Example\bin\Debug\FluentValidation.xml
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\WebPay.Example.exe.config
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\WebPay.Example.exe
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\WebPay.Example.pdb
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\WebPay.dll
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\FluentValidation.dll
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\RestSharp.dll
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\WebPay.pdb
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\FluentValidation.xml
+C:\Projekti\WebPay\WebPay.Example\bin\Debug\RestSharp.xml
+C:\Projekti\WebPay\WebPay.Example\obj\Debug\WebPay.Example.csprojResolveAssemblyReference.cache
+C:\Projekti\WebPay\WebPay.Example\obj\Debug\WebPay.Example.exe
+C:\Projekti\WebPay\WebPay.Example\obj\Debug\WebPay.Example.pdb
