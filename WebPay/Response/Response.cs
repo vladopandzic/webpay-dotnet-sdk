@@ -24,11 +24,12 @@ namespace WebPay.Response
     }
     public class Response<T,U>
     {
-        public Response(T data,U alternativeData, ErrorsResponse errorResponse, HttpStatusCode statusCode)
+        public Response(T data,U alternativeData, ErrorsResponse errorResponse, HttpStatusCode statusCode,Dictionary<string,string> headers)
         {
             this.Data = data;
             this.Errors = errorResponse;
             this.StatusCode = statusCode;
+            this.Headers = headers;
         }
         public System.Net.HttpStatusCode StatusCode { get; set; }
 
@@ -37,5 +38,6 @@ namespace WebPay.Response
         public T Data { get; set; }
 
         public U AlternativeData { get; set; }
+        public Dictionary<string, string> Headers { get; private set; }
     }
 }

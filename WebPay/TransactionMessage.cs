@@ -15,14 +15,6 @@ namespace WebPay
     public abstract class TransactionMessage
     {
 
-        //public PayingResult DoTransaction(PaymentRequest paymentRequest, Language language)
-        //{
-        //    return DoTransactionInternal(paymentRequest, language, new PaymentRequestValidator(), new PaymentClient());
-        //}
-        //public PayingResult DoTransaction(PaymentRequest paymentRequest, Language language, IValidator<PaymentRequest> validator)
-        //{
-        //    return DoTransactionInternal(paymentRequest, language, validator, new PaymentClient());
-        //}
         protected TransactionResult DoTransaction(PaymentCommitRequest paymentRequest, Language language, IValidator validator, IPaymentCommitClient paymentClient)
         {
             return DoTransactionInternal(()=>paymentClient.Pay(paymentRequest),paymentRequest, language, validator);

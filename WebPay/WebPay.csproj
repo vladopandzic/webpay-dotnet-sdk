@@ -53,14 +53,17 @@
     <Compile Include="3DSecureHandler.cs" />
     <Compile Include="Authorization.cs" />
     <Compile Include="Capture.cs" />
+    <Compile Include="Core\3DSecureClient.cs" />
     <Compile Include="Core\Crypt.cs" />
     <Compile Include="Core\NetworkHelper.cs" />
     <Compile Include="Core\PaymentChangeClient.cs" />
     <Compile Include="Core\PaymentChangeRequestObjectBuilder.cs" />
     <Compile Include="Core\PaymentCommitClient.cs" />
     <Compile Include="Core\RequestBuilder.cs" />
+    <Compile Include="Interfaces\I3DSecureClient.cs" />
     <Compile Include="Interfaces\IPaymentChangeClient.cs" />
     <Compile Include="Interfaces\IPaymentCommitClient.cs" />
+    <Compile Include="Request\SecureMessageRequest.cs" />
     <Compile Include="TransactionResult.cs" />
     <Compile Include="PaymentRequestValidatorErrorCodes.cs" />
     <Compile Include="Configuration.cs" />

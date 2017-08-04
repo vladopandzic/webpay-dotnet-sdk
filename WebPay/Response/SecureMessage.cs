@@ -11,15 +11,15 @@ namespace WebPay.Response
     public class SecureMessage
     {
         [XmlElement("id")]
-        public int Id { get; set; }
+        public string Id { get; set; }
 
         [XmlElement("acs-url")]
-        public int AcsUrl { get; set; }
+        public string AcsUrl { get; set; }
 
         [XmlElement("pareq")]
-        public int Pareq { get; set; }
+        public string Pareq { get; set; }
 
         [XmlElement("authenticity-token")]
-        public int AuthenticityToken { get; set; }
+        public string AuthenticityToken { get; set; }
     }
 }

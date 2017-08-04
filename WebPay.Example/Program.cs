@@ -23,18 +23,23 @@ namespace WebPay.Example
             Purchase payment = new Purchase(wbpayIntegration);
             Buyer buyer; Order order; Card card;
 
+
+
             PrepareData(out buyer, out order, out card);
 
-            TransactionResult payingResult = payment.MakeTransaction(buyer, order, card,Language.EN);
+            TransactionResult payingResult = payment.MakeTransaction(buyer, order, card, Language.EN);
 
-          
+            Capture capture = new Capture(wbpayIntegration);
+            capture.MakeTransaction(20.0m, Currency.EUR, "1254", Language.EN);
 
-            if (payingResult.Has3DSecure) {
-                _3DSecureHandler _3dSecureHandler = new _3DSecureHandler(payingResult.SecureMessage);
-               
+            if (payingResult.Has3DSecure)
+            {
+                _3DSecureHandler _3dSecureHandler = new _3DSecureHandler(payingResult.SecureMessage, wbpayIntegration);
+                var response = _3dSecureHandler.FinishTransaction();
+
             }
-         
-            
+
+
         }
 
         private static void PrepareData(out Buyer buyer, out Order order, out Card card)
