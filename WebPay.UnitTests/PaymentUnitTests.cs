@@ -60,12 +60,12 @@ namespace WebPay.UnitTests
             Mock <IPaymentCommitClient> paymentClientMock= new Mock<IPaymentCommitClient>();
             Mock<IPaymentCommitClient> paymentClientMock2 = new Mock<IPaymentCommitClient>();
             PaymentCommitRequestObjectBuilder rb = new PaymentCommitRequestObjectBuilder();
-         
-            TransactionResult result = new Purchase(wpi).MakeTransaction(buyer, order, card, new MyCustomValidator(),paymentClientMock.Object);
+           
+            TransactionResult result = new Purchase(wpi).MakeTransaction(buyer, order, card,Language.EN, new MyCustomValidator(),paymentClientMock.Object);
             paymentClientMock.Verify(x => x.Pay(It.IsAny<PaymentCommitRequest>()), Times.Once);
             buyer.City = "7db11e";
             new Purchase(wpi).MakeTransaction(buyer, order, card,Language.EN, new MyCustomValidator(), paymentClientMock2.Object);
-            paymentClientMock2.Verify(x => x.Pay(paymentRequest), Times.Never);
+            paymentClientMock2.Verify(x => x.Pay(It.IsAny<PaymentCommitRequest>()), Times.Never);
         }
 
         private static void PrepareData(out Buyer buyer, out Order order, out Card card)

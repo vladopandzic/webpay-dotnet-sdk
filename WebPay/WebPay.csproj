@@ -58,11 +58,14 @@
     <Compile Include="Core\NetworkHelper.cs" />
     <Compile Include="Core\PaymentChangeClient.cs" />
     <Compile Include="Core\PaymentChangeRequestObjectBuilder.cs" />
+    <Compile Include="Core\PaymentChangeRequestValidator.cs" />
     <Compile Include="Core\PaymentCommitClient.cs" />
     <Compile Include="Core\RequestBuilder.cs" />
+    <Compile Include="Exceptions\TransactionTypeMismatchException.cs" />
     <Compile Include="Interfaces\I3DSecureClient.cs" />
     <Compile Include="Interfaces\IPaymentChangeClient.cs" />
     <Compile Include="Interfaces\IPaymentCommitClient.cs" />
+    <Compile Include="Refund.cs" />
     <Compile Include="Request\SecureMessageRequest.cs" />
     <Compile Include="TransactionResult.cs" />
     <Compile Include="PaymentRequestValidatorErrorCodes.cs" />
@@ -89,6 +92,7 @@
     <Compile Include="Response\ReponseCode.cs" />
     <Compile Include="Response\Response.cs" />
     <Compile Include="Response\SecureMessage.cs" />
+    <Compile Include="Void.cs" />
     <Compile Include="WebPayIntegration.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,45 +1,37 @@
-﻿using System;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebPay.Core;
+using WebPay.Interfaces;
 using WebPay.Request;
 
-namespace WebPay.Example
+namespace WebPay.UnitTests
 {
-    public class Program
+    [TestClass]
+    public class CaptureUnitTest
     {
-        static void Main(string[] args)
-        {
-            WebPayIntegration wbpayIntegration = new WebPayIntegration(new Configuration
-            {
-                //  AuthenticityToken = "f6c701631605eb9240e5d17d6604b0d819cc53bc",
-                // Key = "$23p/fg#2",
-                AuthenticityToken = "7db11ea5d4a1af32421b564c79b946d1ead3daf0",
-                Key = "dasdsadsa",
-                WebPayRootUrl = "https://ipg.webteh.hr",
+        [TestMethod]
+        [ExpectedException(typeof(WebPay.Exceptions.TransactionTypeMismatchException))]
+        public void Should_Throw_Exception_If_Custom_Client_Doesnt_have_Capture_TransactionType() {
 
+            WebPayIntegration wpi = new WebPayIntegration(new Configuration
+            {
+                AuthenticityToken = "7db11ea5d4a1af32421b564c79b946d1ead3daf0",
+                Key = null,
+                WebPayRootUrl = null
             });
-          
             Buyer buyer; Order order; Card card;
             PrepareData(out buyer, out order, out card);
+            
+            Mock<IPaymentChangeClient> paymentClientMock = new Mock<IPaymentChangeClient>();
+            paymentClientMock.Setup(x => x.transactionType).Returns(TransactionType.Purchase);
+            PaymentCommitRequestObjectBuilder rb = new PaymentCommitRequestObjectBuilder();
 
-
-
-            Purchase payment = new Purchase(wbpayIntegration);
-            TransactionResult payingResult = payment.MakeTransaction(buyer, order, card, Language.EN);
-
-            Capture capture = new Capture(wbpayIntegration);
-            capture.MakeTransaction(20.0m, Currency.EUR, "1254", Language.EN);
-
-            if (payingResult.Has3DSecure)
-            {
-                _3DSecureHandler _3dSecureHandler = new _3DSecureHandler(payingResult.SecureMessage, wbpayIntegration);
-                var response = _3dSecureHandler.FinishTransaction();
-
-            }
-
-
+            new Capture(wpi).MakeTransaction(20.0m, Currency.EUR, "s", Language.EN, null, paymentClientMock.Object);
         }
 
         private static void PrepareData(out Buyer buyer, out Order order, out Card card)

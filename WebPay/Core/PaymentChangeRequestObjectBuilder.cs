@@ -19,11 +19,11 @@ namespace WebPay.Core
             //buyer
           
             //order
-            transaction.Amount = (int)amount;
+            transaction.Amount = MakeCleanLongIntFromDecimal(amount);
             transaction.OrderNumber = orderNumber;
             transaction.Currency = currency;
             transaction.AuthenticityToken = integration.ConfigurationSettings.AuthenticityToken;
-            transaction.Digest = CreateDigest(integration.ConfigurationSettings.Key, orderNumber,(int)amount, currency);
+            transaction.Digest = CreateDigest(integration.ConfigurationSettings.Key, orderNumber,amount, currency);
             paymentRequest.Transaction = transaction;
             return paymentRequest;
 

@@ -10,10 +10,15 @@ namespace WebPay.Core
 {
     public class RequestBuilder
     {
-        protected string CreateDigest(string key, string orderNumber, int amount, Currency currency)
+        public long MakeCleanLongIntFromDecimal(decimal amount)
         {
-            var hashBase = string.Format("{0}{1}{2}{3}", key, orderNumber, amount, currency.ToString());
-            return CalculateHash(hashBase);//vraća hashBase kriptiran "
+            return Convert.ToInt64(amount.ToString("F").Replace(",", "").Replace(".", ""));
+        }
+
+        public string CreateDigest(string key, string orderNumber, decimal amount, Currency currency)
+        {
+            var hashBase = string.Format("{0}{1}{2}{3}", key, orderNumber, MakeCleanLongIntFromDecimal(amount), currency.ToString());
+            return CalculateHash(hashBase);
         }
         protected string CalculateHash(string _hash_base)
         {

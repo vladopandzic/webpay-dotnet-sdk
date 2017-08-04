@@ -14,13 +14,16 @@ namespace WebPay.Core
     public class PaymentChangeClient : Client,IPaymentChangeClient
     {
         private string rootUrl;
-        private TransactionType transactionType;
+      
 
         public PaymentChangeClient(string rootUrl,TransactionType transactionType)
         {
             this.rootUrl = rootUrl;
             this.transactionType = transactionType;
         }
+
+        public TransactionType transactionType { get; set; }
+
         public Response<PaymentResponse, SecureMessage> Pay(PaymentChangeRequest paymentRequest)
         {
             var typeOfTransactionPartOfUrl = "";
