@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using WebPay.Request;
 using WebPay.Response;
 
-namespace WebPay.Core
+namespace WebPay.Http
 {
     public class Client
     {
@@ -50,7 +50,7 @@ namespace WebPay.Core
                     return new Response<T, U>(deserialResponse, default(U), null, response.StatusCode, headers);
                 }
             }
-            //HANDLE INTERBNAL SERVER ERROR, REPRODUCED BY SETTING WORONG AUTHENTICTY TOKEN
+            //TODO:HANDLE INTERNAL SERVER ERROR, REPRODUCED BY SETTING WRONG AUTHENTICTY TOKEN
             return new Response<T, U>(default(T), default(U), null, response.StatusCode, null);
         }
         public Response<T> HandleResponse<T>(IRestResponse response)
@@ -78,7 +78,7 @@ namespace WebPay.Core
                 var deserialResponse = deserial.Deserialize<T>(response);
                 return new Response<T>(deserialResponse, null, response.StatusCode);
             }
-            //HANDLE INTERBNAL SERVER ERROR, REPRODUCED BY SETTING WORONG AUTHENTICTY TOKEN
+            //TODO:HANDLE INTERNAL SERVER ERROR, REPRODUCED BY SETTING WRONG AUTHENTICTY TOKEN
             return new Response<T>(default(T), null, response.StatusCode);
         }
     }

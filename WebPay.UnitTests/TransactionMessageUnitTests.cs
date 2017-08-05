@@ -2,10 +2,11 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using WebPay.Request;
 using FluentValidation;
-using WebPay.Interfaces;
 using Moq;
-using WebPay.Core;
 using System.Collections.Generic;
+using WebPay.Http.Interfaces;
+using WebPay.Validators.Interfaces;
+using WebPay.Request.Builder;
 
 namespace WebPay.UnitTests
 {

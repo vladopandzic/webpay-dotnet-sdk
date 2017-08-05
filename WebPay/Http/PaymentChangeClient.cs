@@ -5,11 +5,11 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Interfaces;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
 using WebPay.Response;
 
-namespace WebPay.Core
+namespace WebPay.Http
 {
     public class PaymentChangeClient : Client,IPaymentChangeClient
     {

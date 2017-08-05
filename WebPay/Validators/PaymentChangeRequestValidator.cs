@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Interfaces;
 using WebPay.Request;
+using WebPay.Validators.Interfaces;
 
-namespace WebPay.Core
+namespace WebPay.Validators
 {
 
     public class PaymentChangeRequestValidator : AbstractValidator<PaymentChangeRequest>,IRequestValidator<PaymentChangeRequest>

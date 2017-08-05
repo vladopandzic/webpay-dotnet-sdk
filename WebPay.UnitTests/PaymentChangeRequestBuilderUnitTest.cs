@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Core;
+using WebPay.Request.Builder;
 
 namespace WebPay.UnitTests
 {
@@ -16,7 +16,7 @@ namespace WebPay.UnitTests
         {
             WebPayIntegration wpi = new WebPayIntegration(new Configuration
             {
-                AuthenticityToken = "7db11ea5d4a1af32421b564c79b946d1ead3daf0",
+                AuthenticityToken = "7db11ea5d4a1af32421b564caaa946d1ead3daf0",
                 Key = null,
                 WebPayRootUrl = null
             });

@@ -4,10 +4,11 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Interfaces;
+using WebPay.Helpers;
 using WebPay.Request;
+using WebPay.Request.Builder.Interfaces;
 
-namespace WebPay.Core
+namespace WebPay.Request.Builder
 {
     public class PaymentCommitRequestObjectBuilder:RequestBuilder,IPaymentCommitRequestObjectBuilder
     {
@@ -38,14 +39,13 @@ namespace WebPay.Core
             transaction.OrderInfo = order.OrderInfo;
             transaction.Currency = order.Currency;
             //processing data
-            transaction.Ip = NetworkHelper.GetIPAddress();
+            transaction.Ip =NetworkHelper.GetIPAddress();
             transaction.Language = language;
             transaction.TransactionType = trancationType;
             transaction.AuthenticityToken = integration.ConfigurationSettings.AuthenticityToken;
             transaction.Digest = CreateDigest(integration.ConfigurationSettings.Key,order.OrderNumber,order.Amount,order.Currency);
-            transaction.NumberOfInstallments = 2;//HARDOCDED
-            transaction.Moto = false;//HARDOCDED
-
+            transaction.NumberOfInstallments = 2;
+            transaction.Moto = false;
 
             paymentRequest.Transaction = transaction;
             return paymentRequest;

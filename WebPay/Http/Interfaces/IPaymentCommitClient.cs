@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using WebPay.Request;
 using WebPay.Response;
 
-namespace WebPay.Interfaces
+namespace WebPay.Http.Interfaces
 {
     public interface IPaymentCommitClient
     {

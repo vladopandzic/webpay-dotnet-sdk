@@ -5,10 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Core;
-using WebPay.Interfaces;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
 using WebPay.Response;
+using WebPay.Validators;
+using WebPay.Validators.Interfaces;
 
 namespace WebPay
 {

@@ -20,9 +20,8 @@ namespace WebPay.Example
         {
             WebPayIntegration wbpayIntegration = new WebPayIntegration(new Configuration
             {
-                //  AuthenticityToken = "f6c701631605eb9240e5d17d6604b0d819cc53bc",
-                // Key = "$23p/fg#2",
-                AuthenticityToken = "7db11ea5d4a1af32421b564c79b946d1ead3daf0",
+             
+                AuthenticityToken = "7db11ea5d4a1af32421b564caaa946d1ead3daf0",
                 Key = "dasdsadsa",
                 WebPayRootUrl = "https://ipg.webteh.hr",
 
@@ -37,6 +36,7 @@ namespace WebPay.Example
             Purchase payment = new Purchase(wbpayIntegration);
             TransactionResult payingResult = payment.MakeTransaction(buyer, order, card, Language.EN);
           
+
             //Capture capture = new Capture(wbpayIntegration);
             //capture.MakeTransaction(20.0m, Currency.EUR, "1254", Language.EN);
 

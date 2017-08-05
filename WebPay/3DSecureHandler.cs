@@ -6,8 +6,8 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Web;
-using WebPay.Core;
-using WebPay.Interfaces;
+using WebPay.Http;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
 using WebPay.Response;
 
@@ -37,17 +37,28 @@ namespace WebPay
         }
         public Response<PaymentResponse> FinishTransaction(I3DSecureClient client)
         {
-
-            smRequest = new SecureMessageRequest();
-            smRequest.MD = _secureMessage.AuthenticityToken;
-            smRequest.PaRes = _secureMessage.Pareq;
+            PrepareRequest();
 
             return client.FinishTransaction(smRequest);
         }
+
+        private void PrepareRequest()
+        {
+            smRequest = new SecureMessageRequest();
+            smRequest.MD = _secureMessage.AuthenticityToken;
+            smRequest.PaRes = _secureMessage.Pareq;
+        }
+
         public Response<PaymentResponse> FinishTransaction()
         {
             var client = new _3DSecureClient(_integation.ConfigurationSettings.WebPayRootUrl);
             return FinishTransaction(client);
+        }
+        public async Task<Response<PaymentResponse>> FinishTransactionAsync()
+        {
+            var client = new _3DSecureClient(_integation.ConfigurationSettings.WebPayRootUrl);
+            PrepareRequest();
+            return await client.FinishTransactionAsync(smRequest);
         }
 
         public string GetBasicRedirectHtml(string term_url)

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Interfaces;
-using WebPay.Request;
 
-namespace WebPay.Core
+using WebPay.Request;
+using WebPay.Request.Builder.Interfaces;
+
+namespace WebPay.Request.Builder
 {
     public class PaymentChangeRequestObjectBuilder:RequestBuilder, IPaymentChangeRequestObjectBuilder
     {

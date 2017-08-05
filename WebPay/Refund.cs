@@ -4,10 +4,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Core;
 using WebPay.Exceptions;
-using WebPay.Interfaces;
+using WebPay.Http;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
+using WebPay.Request.Builder;
+using WebPay.Request.Builder.Interfaces;
+using WebPay.Validators;
+using WebPay.Validators.Interfaces;
 
 namespace WebPay
 {

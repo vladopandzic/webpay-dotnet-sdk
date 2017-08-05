@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
 
-namespace WebPay.Interfaces
+namespace WebPay.Validators.Interfaces
 {
     public interface ITransactionMessage
     {

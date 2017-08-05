@@ -53,29 +53,29 @@
     <Compile Include="3DSecureHandler.cs" />
     <Compile Include="Authorization.cs" />
     <Compile Include="Capture.cs" />
-    <Compile Include="Core\3DSecureClient.cs" />
-    <Compile Include="Core\NetworkHelper.cs" />
-    <Compile Include="Core\PaymentChangeClient.cs" />
-    <Compile Include="Core\PaymentChangeRequestObjectBuilder.cs" />
-    <Compile Include="Core\PaymentChangeRequestValidator.cs" />
-    <Compile Include="Core\PaymentCommitClient.cs" />
-    <Compile Include="Core\RequestBuilder.cs" />
+    <Compile Include="Http\3DSecureClient.cs" />
+    <Compile Include="Helpers\NetworkHelper.cs" />
+    <Compile Include="Http\PaymentChangeClient.cs" />
+    <Compile Include="Request\Builder\PaymentChangeRequestObjectBuilder.cs" />
+    <Compile Include="Validators\PaymentChangeRequestValidator.cs" />
+    <Compile Include="Http\PaymentCommitClient.cs" />
+    <Compile Include="Request\Builder\RequestBuilder.cs" />
     <Compile Include="Exceptions\TransactionTypeMismatchException.cs" />
-    <Compile Include="Interfaces\I3DSecureClient.cs" />
-    <Compile Include="Interfaces\IPaymentChangeClient.cs" />
-    <Compile Include="Interfaces\IPaymentChangeRequestObjectBuilder.cs" />
-    <Compile Include="Interfaces\IPaymentCommitClient.cs" />
-    <Compile Include="Interfaces\IPaymentCommitRequestObjectBuilder.cs" />
-    <Compile Include="Interfaces\IRequestValidator.cs" />
-    <Compile Include="Interfaces\ITransactionMessage.cs" />
+    <Compile Include="Http\Interfaces\I3DSecureClient.cs" />
+    <Compile Include="Http\Interfaces\IPaymentChangeClient.cs" />
+    <Compile Include="Request\Builder\Interfaces\IPaymentChangeRequestObjectBuilder.cs" />
+    <Compile Include="Http\Interfaces\IPaymentCommitClient.cs" />
+    <Compile Include="Request\Builder\Interfaces\IPaymentCommitRequestObjectBuilder.cs" />
+    <Compile Include="Validators\Interfaces\IRequestValidator.cs" />
+    <Compile Include="Validators\Interfaces\ITransactionMessage.cs" />
     <Compile Include="Refund.cs" />
     <Compile Include="Request\SecureMessageRequest.cs" />
     <Compile Include="TransactionResult.cs" />
     <Compile Include="PaymentRequestValidatorErrorCodes.cs" />
     <Compile Include="Configuration.cs" />
-    <Compile Include="Core\Client.cs" />
-    <Compile Include="Core\PaymentCommitRequestObjectBuilder.cs" />
-    <Compile Include="Core\PaymentCommitRequestValidator.cs" />
+    <Compile Include="Http\Client.cs" />
+    <Compile Include="Request\Builder\PaymentCommitRequestObjectBuilder.cs" />
+    <Compile Include="Validators\PaymentCommitRequestValidator.cs" />
     <Compile Include="Exceptions\IntergrationException.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Purchase.cs" />
@@ -102,6 +102,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

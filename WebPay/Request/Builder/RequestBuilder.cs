@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebPay.Request;
 
-namespace WebPay.Core
+namespace WebPay.Request.Builder
 {
     public class RequestBuilder
     {

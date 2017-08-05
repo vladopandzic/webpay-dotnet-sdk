@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using WebPay.Request;
 
-namespace WebPay.Interfaces
+namespace WebPay.Request.Builder.Interfaces
 {
     public interface IPaymentChangeRequestObjectBuilder
     {

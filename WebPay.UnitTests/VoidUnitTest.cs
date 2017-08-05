@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using WebPay.Interfaces;
+using WebPay.Http.Interfaces;
 using WebPay.Request;
 
 namespace WebPay.UnitTests

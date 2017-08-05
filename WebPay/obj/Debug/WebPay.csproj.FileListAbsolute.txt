@@ -13,6 +13,6 @@ C:\Projekti\WebPay\WebPay\bin\Debug\FluentValidation.dll
 C:\Projekti\WebPay\WebPay\bin\Debug\RestSharp.dll
 C:\Projekti\WebPay\WebPay\bin\Debug\FluentValidation.xml
 C:\Projekti\WebPay\WebPay\bin\Debug\RestSharp.xml
-C:\Projekti\WebPay\WebPay\obj\Debug\WebPay.csprojResolveAssemblyReference.cache
 C:\Projekti\WebPay\WebPay\obj\Debug\WebPay.dll
 C:\Projekti\WebPay\WebPay\obj\Debug\WebPay.pdb
+C:\Projekti\WebPay\WebPay\obj\Debug\WebPay.csprojResolveAssemblyReference.cache
