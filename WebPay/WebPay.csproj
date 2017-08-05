@@ -63,6 +63,7 @@
     <Compile Include="Exceptions\TransactionTypeMismatchException.cs" />
     <Compile Include="Interfaces\I3DSecureClient.cs" />
     <Compile Include="Interfaces\IPaymentChangeClient.cs" />
+    <Compile Include="Interfaces\IPaymentChangeRequestObjectBuilder.cs" />
     <Compile Include="Interfaces\IPaymentCommitClient.cs" />
     <Compile Include="Interfaces\IPaymentCommitRequestObjectBuilder.cs" />
     <Compile Include="Interfaces\IRequestValidator.cs" />

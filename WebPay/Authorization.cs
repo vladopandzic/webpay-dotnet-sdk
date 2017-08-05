@@ -28,31 +28,33 @@ namespace WebPay
 
         public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language)
         {
-
             var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
-
             return DoTransaction(paymentRequest, language, new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
         }
         public async Task<TransactionResult> MakeTransactionAsync(Buyer buyer, Order order, Card card, Language language)
         {
-
             var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
-
             return await DoTransactionAsync(paymentRequest, language, new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
         }
         public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator)
         {
-
             var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
-
             return DoTransaction(paymentRequest, language, validator, new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
+        }
+        public async Task<TransactionResult> MakeTransactionAsync(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator)
+        {
+            var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
+            return await DoTransactionAsync(paymentRequest, language, validator, new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
         }
         public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator, IPaymentCommitClient client)
         {
-
             var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
-
             return DoTransaction(paymentRequest, language, validator, client);
+        }
+        public async Task<TransactionResult> MakeTransactionAsync(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator, IPaymentCommitClient client)
+        {
+            var paymentRequest = requestBuilder.Build(buyer, order, card, wbpayIntegration, TransactionType.Authorize, language);
+            return await DoTransactionAsync(paymentRequest, language, validator, client);
         }
     }
 }

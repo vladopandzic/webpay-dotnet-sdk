@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using WebPay.Interfaces;
 using WebPay.Request;
 
 namespace WebPay.Core
 {
-    public class PaymentChangeRequestObjectBuilder:RequestBuilder
+    public class PaymentChangeRequestObjectBuilder:RequestBuilder, IPaymentChangeRequestObjectBuilder
     {
         public PaymentChangeRequest Build(decimal amount, Currency currency, string orderNumber, WebPayIntegration integration,Language language)
         {

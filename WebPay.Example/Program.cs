@@ -36,7 +36,7 @@ namespace WebPay.Example
 
             Purchase payment = new Purchase(wbpayIntegration);
             TransactionResult payingResult = payment.MakeTransaction(buyer, order, card, Language.EN);
-
+          
             //Capture capture = new Capture(wbpayIntegration);
             //capture.MakeTransaction(20.0m, Currency.EUR, "1254", Language.EN);
 

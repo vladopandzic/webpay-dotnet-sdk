@@ -12,7 +12,7 @@ namespace WebPay.Interfaces
     {
         Response<PaymentResponse, SecureMessage> Send(PaymentChangeRequest paymentRequest);
 
-      //  Response<PaymentResponse, SecureMessage> SendAsync(PaymentChangeRequest paymentRequest);
+        Task<Response<PaymentResponse, SecureMessage>> SendAsync(PaymentChangeRequest paymentRequest);
 
         TransactionType transactionType { get; set; }
     }

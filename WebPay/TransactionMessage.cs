@@ -14,29 +14,45 @@ namespace WebPay
 {
     public abstract class TransactionMessage
     {
-
-       protected  TransactionResult DoTransaction(PaymentCommitRequest paymentRequest, Language language, IRequestValidator<PaymentCommitRequest> validator, IPaymentCommitClient paymentClient)
+        #region Authorization and Purchase
+        protected  TransactionResult DoTransaction(PaymentCommitRequest paymentRequest, Language language, IRequestValidator<PaymentCommitRequest> validator, IPaymentCommitClient paymentClient)
         {
             return DoTransactionInternal(()=>Task.FromResult(paymentClient.Send(paymentRequest)),paymentRequest, language, validator).Result;
+        }
+        protected Task<TransactionResult> DoTransactionAsync(PaymentCommitRequest paymentRequest, Language language, IRequestValidator<PaymentCommitRequest> validator, IPaymentCommitClient paymentClient)
+        {
+            return DoTransactionInternal(() => paymentClient.SendAsync(paymentRequest), paymentRequest, language, validator);
         }
         protected TransactionResult DoTransaction(PaymentCommitRequest paymentRequest, Language language, IPaymentCommitClient paymentClient)
         {
             return DoTransactionInternal(()=> Task.FromResult(paymentClient.Send(paymentRequest)),paymentRequest, language, new PaymentCommitRequestValidator()).Result;
         }
+
         protected  Task<TransactionResult> DoTransactionAsync(PaymentCommitRequest paymentRequest, Language language, IPaymentCommitClient paymentClient)
         {
             return DoTransactionInternal(() => paymentClient.SendAsync(paymentRequest), paymentRequest, language, new PaymentCommitRequestValidator());
         }
+        #endregion
+
+        #region Refund, Capture and Void
         protected TransactionResult DoTransaction(PaymentChangeRequest paymentRequest, Language language, IRequestValidator<PaymentChangeRequest> validator, IPaymentChangeClient paymentClient)
         {
             return DoTransactionInternal(() => Task.FromResult(paymentClient.Send(paymentRequest)), paymentRequest, language, validator).Result;
+        }
+        protected Task<TransactionResult> DoTransactionAsync(PaymentChangeRequest paymentRequest, Language language, IRequestValidator<PaymentChangeRequest> validator, IPaymentChangeClient paymentClient)
+        {
+            return DoTransactionInternal(() => paymentClient.SendAsync(paymentRequest), paymentRequest, language, validator);
         }
         protected TransactionResult DoTransaction(PaymentChangeRequest paymentRequest, Language language, IPaymentChangeClient paymentClient)
         {
             return DoTransactionInternal(() => Task.FromResult(paymentClient.Send(paymentRequest)), paymentRequest, language, new PaymentChangeRequestValidator()).Result;
         }
+        protected Task<TransactionResult> DoTransactionAsync(PaymentChangeRequest paymentRequest, Language language, IPaymentChangeClient paymentClient)
+        {
+            return DoTransactionInternal(() => paymentClient.SendAsync(paymentRequest), paymentRequest, language, new PaymentChangeRequestValidator());
+        }
+        #endregion
 
-      
 
         private async Task<TransactionResult> DoTransactionInternal<T>(Func<Task<Response<PaymentResponse,SecureMessage>>> action,T paymentRequest, Language language, IRequestValidator<T> paymentRequestValidator)
         {

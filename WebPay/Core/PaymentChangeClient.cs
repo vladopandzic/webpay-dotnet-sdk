@@ -26,34 +26,54 @@ namespace WebPay.Core
 
         public Response<PaymentResponse, SecureMessage> Send(PaymentChangeRequest paymentRequest)
         {
+            RestRequest restsharpRequest;
+            RestClient restClient;
+            PrepareRestClient(paymentRequest, out restsharpRequest, out restClient);
+            IRestResponse response = restClient.Execute(restsharpRequest);
+            return HandleResponse<PaymentResponse, SecureMessage>(response, () => response.Content.Contains("<secure-message"));
+        }
+        public Task<Response<PaymentResponse, SecureMessage>> SendAsync(PaymentChangeRequest paymentRequest)
+        {
+            RestRequest restsharpRequest;
+            RestClient restClient;
+            var taskCompletionSource = new TaskCompletionSource<Response<PaymentResponse, SecureMessage>>();
+            PrepareRestClient(paymentRequest, out restsharpRequest, out restClient);
+         
+            restClient.ExecuteAsync(restsharpRequest, (r) =>
+
+                taskCompletionSource.SetResult(HandleResponse<PaymentResponse, SecureMessage>(r, () => r.Content.Contains("<secure-message")))
+            );
+            return taskCompletionSource.Task;
+        }
+
+        private void PrepareRestClient(PaymentChangeRequest paymentRequest, out RestRequest restsharpRequest, out RestClient restClient)
+        {
             var typeOfTransactionPartOfUrl = "";
-            if (transactionType == TransactionType.Capture) {
+            if (transactionType == TransactionType.Capture)
+            {
 
                 typeOfTransactionPartOfUrl = "capture";
 
-            } else if (transactionType == TransactionType.Refund)
+            }
+            else if (transactionType == TransactionType.Refund)
             {
                 typeOfTransactionPartOfUrl = "refund";
 
-            } else if (transactionType == TransactionType.Void)
+            }
+            else if (transactionType == TransactionType.Void)
             {
                 typeOfTransactionPartOfUrl = "void";
             }
-            var restsharpRequest = new RestRequest
+            restsharpRequest = new RestRequest
             {
                 Method = Method.POST,
-                Resource = "/transactions/"+ paymentRequest.Transaction.OrderNumber+ "/"+typeOfTransactionPartOfUrl+".xml",
+                Resource = "/transactions/" + paymentRequest.Transaction.OrderNumber + "/" + typeOfTransactionPartOfUrl + ".xml",
                 XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer(),
                 RequestFormat = DataFormat.Xml
             };
-
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             restsharpRequest.AddBody(paymentRequest.Transaction);
-            var restClient = new RestClient(rootUrl); 
-
-            IRestResponse response = restClient.Execute(restsharpRequest);
-            return HandleResponse<PaymentResponse, SecureMessage>(response, () => response.Content.Contains("<secure-message"));
-
+            restClient = new RestClient(rootUrl);
         }
     }
 }
