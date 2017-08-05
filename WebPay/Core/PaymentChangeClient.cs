@@ -24,7 +24,7 @@ namespace WebPay.Core
 
         public TransactionType transactionType { get; set; }
 
-        public Response<PaymentResponse, SecureMessage> Pay(PaymentChangeRequest paymentRequest)
+        public Response<PaymentResponse, SecureMessage> Send(PaymentChangeRequest paymentRequest)
         {
             var typeOfTransactionPartOfUrl = "";
             if (transactionType == TransactionType.Capture) {
@@ -49,7 +49,7 @@ namespace WebPay.Core
 
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             restsharpRequest.AddBody(paymentRequest.Transaction);
-            var restClient = new RestClient(rootUrl);  //bez onog api
+            var restClient = new RestClient(rootUrl); 
 
             IRestResponse response = restClient.Execute(restsharpRequest);
             return HandleResponse<PaymentResponse, SecureMessage>(response, () => response.Content.Contains("<secure-message"));

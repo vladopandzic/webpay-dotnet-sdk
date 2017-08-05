@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using FluentValidation.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,16 @@ namespace WebPay
         {
             return rule.WithState(x => code);
         }
-
+        public static List<ValidationError> ToValidationErrors(this IList<ValidationFailure> validationFailures)
+        {
+            return validationFailures.Select(x => new ValidationError
+            {
+                ErrorCode = x.ErrorCode,
+                ErrorMessage = x.ErrorMessage,
+                CustomState = x.CustomState,
+                PropertyName = x.PropertyName,
+                AttemptedValue = x.AttemptedValue
+            }).ToList();
+        }
     }
 }

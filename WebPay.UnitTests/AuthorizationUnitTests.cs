@@ -10,14 +10,11 @@ using WebPay.Request;
 
 namespace WebPay.UnitTests
 {
-
     [TestClass]
-    public class VoidUnitTest
+    public class AuthorizationUnitTests
     {
         [TestMethod]
-        [ExpectedException(typeof(WebPay.Exceptions.TransactionTypeMismatchException))]
-        public void Should_Throw_Exception_If_Custom_Client_Doesnt_have_Void_TransactionType()
-        {
+        public void Should_Have_Trancation_Type_Authorize() {
 
             WebPayIntegration wpi = new WebPayIntegration(new Configuration
             {
@@ -27,15 +24,12 @@ namespace WebPay.UnitTests
             });
             Buyer buyer; Order order; Card card;
             PrepareData(out buyer, out order, out card);
-
-            Mock<IPaymentChangeClient> paymentClientMock = new Mock<IPaymentChangeClient>();
-            paymentClientMock.Setup(x => x.transactionType).Returns(TransactionType.Purchase);
-          
-            new Void(wpi).MakeTransaction(20.0m, Currency.EUR, "s", Language.EN, null, paymentClientMock.Object);
-        }
-        [TestMethod]
-        public void S() {
-
+           
+            Mock<IPaymentCommitClient> pc = new Mock<IPaymentCommitClient>();
+            Mock<IPaymentCommitRequestObjectBuilder> pcr = new Mock<IPaymentCommitRequestObjectBuilder>();
+            Authorization auth = new Authorization(wpi,pcr.Object);
+            auth.MakeTransaction(buyer, order, card, Language.EN, null, pc.Object);
+            pcr.Verify(x => x.Build(buyer, order, card, wpi,It.Is<TransactionType>(p=>p.HasFlag(TransactionType.Authorize)), Language.EN));
         }
         private static void PrepareData(out Buyer buyer, out Order order, out Card card)
         {

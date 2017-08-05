@@ -9,7 +9,7 @@ using WebPay.Request;
 
 namespace WebPay.Core
 {
-    public class PaymentCommitRequestValidator : AbstractValidator<PaymentCommitRequest>
+    public class PaymentCommitRequestValidator : AbstractValidator<PaymentCommitRequest>, IRequestValidator<PaymentCommitRequest>
     {
         public PaymentCommitRequestValidator()
         {
@@ -34,7 +34,21 @@ namespace WebPay.Core
             RuleFor(x => x.Transaction.NumberOfInstallments).InclusiveBetween(2, 12).WithErrorCode((int)PaymentRequestValidatorErrorCodes.ProcessingDataNumberOfInstallmentsRange);
 
         }
-        
 
+        public bool IsValid(PaymentCommitRequest instance)
+        {
+            return this.DoValidation(instance).Any();
+        }
+
+        public List<ValidationError> DoValidation(PaymentCommitRequest instance)
+        {
+            return this.Validate(instance).Errors.ToValidationErrors();
+        }
+
+      
+
+       
+
+   
     }
 }

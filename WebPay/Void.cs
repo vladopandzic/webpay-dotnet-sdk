@@ -28,7 +28,7 @@ namespace WebPay
             
             return DoTransaction(paymentRequest, language,new  PaymentChangeRequestValidator(), new PaymentChangeClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl,TransactionType.Void));
         }
-        public TransactionResult MakeTransaction(decimal amount, Currency currency, string orderNumber, Language language, IValidator<PaymentChangeRequest> validator)
+        public TransactionResult MakeTransaction(decimal amount, Currency currency, string orderNumber, Language language, IRequestValidator<PaymentChangeRequest> validator)
         {
 
             PaymentChangeRequest paymentRequest = new PaymentChangeRequestObjectBuilder()
@@ -36,10 +36,10 @@ namespace WebPay
 
             return DoTransaction(paymentRequest, language, validator, new PaymentChangeClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl,TransactionType.Void));
         }
-        public TransactionResult MakeTransaction(decimal amount, Currency currency, string orderNumber, Language language, IValidator<PaymentCommitRequest> validator,IPaymentChangeClient client)
+        public TransactionResult MakeTransaction(decimal amount, Currency currency, string orderNumber, Language language, IRequestValidator<PaymentChangeRequest> validator,IPaymentChangeClient client)
         {
             if (client.transactionType != TransactionType.Void) {
-                throw new TransactionTypeMismatchException("Capture transation cannot accept client that was initialized with transactionType"+client.transactionType);
+                throw new TransactionTypeMismatchException("Void transation cannot accept client that was initialized with transactionType"+client.transactionType);
             }
             PaymentChangeRequest paymentRequest = new PaymentChangeRequestObjectBuilder()
                                              .Build(amount, currency, orderNumber, wbpayIntegration, language);

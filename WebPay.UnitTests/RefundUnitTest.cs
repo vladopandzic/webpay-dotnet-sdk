@@ -15,7 +15,7 @@ namespace WebPay.UnitTests
     {
         [TestMethod]
         [ExpectedException(typeof(WebPay.Exceptions.TransactionTypeMismatchException))]
-        public void Should_Throw_Exception_If_Custom_Client_Doesnt_have_Capture_TransactionType()
+        public void Should_Throw_Exception_If_Custom_Client_Doesnt_have_Refund_TransactionType()
         {
 
             WebPayIntegration wpi = new WebPayIntegration(new Configuration
@@ -30,7 +30,7 @@ namespace WebPay.UnitTests
             Mock<IPaymentChangeClient> paymentClientMock = new Mock<IPaymentChangeClient>();
             paymentClientMock.Setup(x => x.transactionType).Returns(TransactionType.Purchase);
            
-            new Capture(wpi).MakeTransaction(20.0m, Currency.EUR, "s", Language.EN, null, paymentClientMock.Object);
+            new Refund(wpi).MakeTransaction(20.0m, Currency.EUR, "s", Language.EN, null, paymentClientMock.Object);
         }
 
         private static void PrepareData(out Buyer buyer, out Order order, out Card card)

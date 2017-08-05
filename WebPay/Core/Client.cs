@@ -25,7 +25,7 @@ namespace WebPay.Core
                     var headers = response.Headers.Select(x => new { Name = x.Name, Value = x.Value }).ToDictionary(t => t.Name, t => t.Value?.ToString());
                     return new Response<T, U>(default(T), default(U), errors, response.StatusCode, headers);
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     var error = new ErrorsResponse(); error.Errors.Add("DESERALIZE EXCEPTION!");
                     return new Response<T, U>(default(T), default(U), error, response.StatusCode, null);

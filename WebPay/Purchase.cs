@@ -26,7 +26,7 @@ namespace WebPay
 
           return DoTransaction(paymentRequest, language,new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
         }
-        public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language,IValidator<PaymentCommitRequest> validator)
+        public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator)
         {
 
             PaymentCommitRequest paymentRequest = new PaymentCommitRequestObjectBuilder()
@@ -34,7 +34,7 @@ namespace WebPay
 
             return DoTransaction(paymentRequest, language,validator, new PaymentCommitClient(wbpayIntegration.ConfigurationSettings.WebPayRootUrl));
         }
-        public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language, IValidator<PaymentCommitRequest> validator,IPaymentCommitClient client)
+        public TransactionResult MakeTransaction(Buyer buyer, Order order, Card card, Language language, IRequestValidator<PaymentCommitRequest> validator,IPaymentCommitClient client)
         {
 
             PaymentCommitRequest paymentRequest = new PaymentCommitRequestObjectBuilder()

@@ -9,7 +9,7 @@ using WebPay.Request;
 
 namespace WebPay.Core
 {
-    public class PaymentCommitRequestObjectBuilder:RequestBuilder
+    public class PaymentCommitRequestObjectBuilder:RequestBuilder,IPaymentCommitRequestObjectBuilder
     {
        
 

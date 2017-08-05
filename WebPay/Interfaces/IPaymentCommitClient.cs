@@ -10,6 +10,8 @@ namespace WebPay.Interfaces
 {
     public interface IPaymentCommitClient
     {
-         Response<PaymentResponse, SecureMessage> Pay(PaymentCommitRequest paymentRequest);
+        Response<PaymentResponse, SecureMessage> Send(PaymentCommitRequest paymentRequest);
+
+        Task<Response<PaymentResponse, SecureMessage>> SendAsync(PaymentCommitRequest paymentRequest);
     }
 }

@@ -12,13 +12,8 @@ namespace WebPay.Core
         public PaymentChangeRequest Build(decimal amount, Currency currency, string orderNumber, WebPayIntegration integration,Language language)
         {
 
-
             Request.PaymentChangeRequest paymentRequest = new PaymentChangeRequest();
-
-            var transaction = new TransactionSimple();
-            //buyer
-          
-            //order
+            var transaction = new TransactionSimple();           
             transaction.Amount = MakeCleanLongIntFromDecimal(amount);
             transaction.OrderNumber = orderNumber;
             transaction.Currency = currency;
@@ -26,13 +21,6 @@ namespace WebPay.Core
             transaction.Digest = CreateDigest(integration.ConfigurationSettings.Key, orderNumber,amount, currency);
             paymentRequest.Transaction = transaction;
             return paymentRequest;
-
-            //}
-            //else
-            //{
-            //    return null;//privremeno
-            //}
-
         }
 
 

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Web;
 using WebPay.Core;
+using WebPay.Interfaces;
 using WebPay.Request;
 using WebPay.Response;
 
@@ -15,6 +16,8 @@ namespace WebPay
 
     public class _3DSecureHandler
     {
+
+        public SecureMessageRequest smRequest { get; set; }
         private SecureMessage _secureMessage;
 
         public WebPayIntegration _integation { get; private set; }
@@ -32,15 +35,19 @@ namespace WebPay
         {
             return httpContext.Session["WEBPAY_SESSION_DATA"] as SecureMessage;
         }
-        public Response<PaymentResponse> FinishTransaction()
+        public Response<PaymentResponse> FinishTransaction(I3DSecureClient client)
         {
 
-            SecureMessageRequest smRequest = new SecureMessageRequest();
+            smRequest = new SecureMessageRequest();
             smRequest.MD = _secureMessage.AuthenticityToken;
             smRequest.PaRes = _secureMessage.Pareq;
 
-            var client = new _3DSecureClient(_integation.ConfigurationSettings.WebPayRootUrl);
             return client.FinishTransaction(smRequest);
+        }
+        public Response<PaymentResponse> FinishTransaction()
+        {
+            var client = new _3DSecureClient(_integation.ConfigurationSettings.WebPayRootUrl);
+            return FinishTransaction(client);
         }
 
         public string GetBasicRedirectHtml(string term_url)

@@ -11,7 +11,7 @@ using WebPay.Response;
 
 namespace WebPay.Core
 {
-    public class PaymentCommitClient:Client,IPaymentCommitClient
+    public class PaymentCommitClient : Client, IPaymentCommitClient
     {
         private string rootUrl;
 
@@ -19,24 +19,44 @@ namespace WebPay.Core
         {
             this.rootUrl = rootUrl;
         }
-        public Response<PaymentResponse, SecureMessage> Pay(PaymentCommitRequest paymentRequest)
+        public Response<PaymentResponse, SecureMessage> Send(PaymentCommitRequest paymentRequest)
         {
+            RestRequest restsharpRequest;
+            RestClient restClient;
+            PrepareRestClient(paymentRequest, out restsharpRequest, out restClient);
 
-            var restsharpRequest = new RestRequest
+            IRestResponse response = restClient.Execute(restsharpRequest);
+            return HandleResponse<PaymentResponse, SecureMessage>(response, () => response.Content.Contains("<secure-message"));
+        }
+        public Task<Response<PaymentResponse, SecureMessage>> SendAsync(PaymentCommitRequest paymentRequest)
+        {
+            RestRequest restsharpRequest;
+            RestClient restClient;
+            var taskCompletionSource = new TaskCompletionSource<Response<PaymentResponse, SecureMessage>>();
+            PrepareRestClient(paymentRequest, out restsharpRequest, out restClient);
+
+            restClient.ExecuteAsync(restsharpRequest, (r) => 
+
+                taskCompletionSource.SetResult(HandleResponse<PaymentResponse, SecureMessage>(r, () => r.Content.Contains("<secure-message")))
+            );
+            return taskCompletionSource.Task;
+
+        }
+
+        private void PrepareRestClient(PaymentCommitRequest paymentRequest, out RestRequest restsharpRequest, out RestClient restClient)
+        {
+            restsharpRequest = new RestRequest
             {
                 Method = Method.POST,
                 Resource = "/api",
                 XmlSerializer = new RestSharp.Serializers.DotNetXmlSerializer(),
                 RequestFormat = DataFormat.Xml
             };
-
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12 | SecurityProtocolType.Tls11;
             restsharpRequest.AddBody(paymentRequest.Transaction);
-            var restClient = new RestClient(rootUrl);
-
-            IRestResponse response = restClient.Execute(restsharpRequest);
-            return HandleResponse<PaymentResponse, SecureMessage>(response, () => response.Content.Contains("<secure-message"));
-
+            restClient = new RestClient(rootUrl);
         }
+
+
     }
 }

@@ -10,8 +10,10 @@ namespace WebPay.Interfaces
 {
     public interface IPaymentChangeClient
     {
-        Response<PaymentResponse, SecureMessage> Pay(PaymentChangeRequest paymentRequest);
+        Response<PaymentResponse, SecureMessage> Send(PaymentChangeRequest paymentRequest);
 
-         TransactionType transactionType { get; set; }
+      //  Response<PaymentResponse, SecureMessage> SendAsync(PaymentChangeRequest paymentRequest);
+
+        TransactionType transactionType { get; set; }
     }
 }

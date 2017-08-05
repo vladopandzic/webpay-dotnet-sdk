@@ -14,7 +14,7 @@ namespace WebPay
 
         public bool RequestWasSuccessfullyValidated { get; set; }
 
-        public IList<ValidationFailure> RequestValidationErrors { get; set; }
+        public IList<ValidationError> RequestValidationErrors { get; set; }
 
         public ErrorsResponse WebPayErrors { get; set; }
 
